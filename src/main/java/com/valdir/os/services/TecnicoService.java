@@ -30,7 +30,7 @@ public class TecnicoService {
 
 	public Tecnico create(TecnicoDTO tecnico) {	
 		if(this.findByCPF(tecnico)!= null) {
-			throw new DataIntegrationViolationException("CPF já cadastrado na base de dados: " + tecnico.getCpf());
+			throw new DataIntegrationViolationException("CPF já cadastrado na base de dados." + tecnico.getCpf());
 		}
 		return tecnicoRepository.save(new Tecnico(null, tecnico.getNome(), tecnico.getTelefone(), tecnico.getCpf()));
 	}

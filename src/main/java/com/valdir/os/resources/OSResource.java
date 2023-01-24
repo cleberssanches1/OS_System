@@ -23,7 +23,7 @@ import com.valdir.os.services.OSService;
 
 import jakarta.validation.Valid;
 
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/os")
 public class OSResource {

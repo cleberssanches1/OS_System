@@ -51,8 +51,8 @@ public class OSService {
 		osEntity.setCliente(clienteRepository.findById(os.getCliente()).get());
 		osEntity.setTecnico(tecnicoRepository.findById(os.getTecnico()).get());
 		
-		osEntity.setPrioridade(Prioridade.toEnum(os.getPrioridade()));
-		osEntity.setStatus(Status.toEnum(os.getStatus()));
+		osEntity.setPrioridade(os.getPrioridade());
+		osEntity.setStatus(os.getStatus());
 		
 		return osEntity;
 	}
@@ -66,13 +66,15 @@ public class OSService {
 		OS obj = findById(id);
 		
 		obj.setObservacoes(osDto.getObservacoes());
-		obj.setPrioridade(Prioridade.toEnum(osDto.getPrioridade()));
-		obj.setStatus(Status.toEnum(osDto.getStatus()));
+		obj.setPrioridade(osDto.getPrioridade());
+		obj.setStatus(osDto.getStatus());
 		obj.setTecnico(tecnicoRepository.findById(osDto.getTecnico()).get());
 		obj.setCliente(clienteRepository.findById(osDto.getCliente()).get());	 
 			
-		if(Status.ENCERRADO.equals(Status.toEnum(osDto.getStatus()))) {
+		if(Status.ENCERRADO.equals(osDto.getStatus())) {
 			obj.setDataFechamento(LocalDateTime.now());
+		}else {
+			obj.setDataFechamento(null);
 		}
 		
 		obj = oSRepository.save(obj);

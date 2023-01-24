@@ -22,21 +22,20 @@ import com.valdir.os.dto.TecnicoDTO;
 import com.valdir.os.services.TecnicoService;
 
 import jakarta.validation.Valid;
-
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/tecnicos")
 public class TecnicoResource {
 
 	@Autowired
 	private TecnicoService tecnicoService;
-
+	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<TecnicoDTO> findById(@PathVariable Integer id) {
 		TecnicoDTO dto = new TecnicoDTO(tecnicoService.findById(id));
 		return ResponseEntity.ok().body(dto);
 	}
-
+ 	
 	@GetMapping
 	public ResponseEntity<List<TecnicoDTO>> findAll() {
 
@@ -51,7 +50,7 @@ public class TecnicoResource {
 		
 		return ResponseEntity.ok().body(list); 
 	}
-
+	
 	@PostMapping
 	public ResponseEntity<TecnicoDTO> create(@Valid @RequestBody TecnicoDTO tecnicoDto) {
 		Tecnico tecnico = tecnicoService.create(tecnicoDto);
@@ -59,13 +58,13 @@ public class TecnicoResource {
 
 		return ResponseEntity.created(uri).body( new TecnicoDTO(tecnico));
 	}
-
+ 
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		tecnicoService.delete(id);
 		return ResponseEntity.noContent().build();
 	}
-
+ 
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<TecnicoDTO> update(@PathVariable Integer id, @Valid @RequestBody Tecnico tecnico) {		 
 		return ResponseEntity.ok().body(new TecnicoDTO(tecnicoService.update(id, tecnico)));

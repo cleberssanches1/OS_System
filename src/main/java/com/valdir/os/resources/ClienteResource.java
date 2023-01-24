@@ -23,7 +23,7 @@ import com.valdir.os.services.ClienteService;
 
 import jakarta.validation.Valid;
 
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/clientes")
 public class ClienteResource {
